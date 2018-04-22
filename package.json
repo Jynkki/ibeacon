@@ -1,0 +1,16 @@
+{
+  "name": "timereport",
+  "version": "0.0.1",
+  "description": "beacon based timereporting",
+  "main": "deviceSample.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./deviceSample.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ibmiotf": "^0.2.41",
+    "noble": "github:sandeepmistry/noble"
+  }
+}
