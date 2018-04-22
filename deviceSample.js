@@ -6,16 +6,12 @@ var RSSI_THRESHOLD    = -90;
 var EXIT_GRACE_PERIOD = 10000; // milliseconds
 var BEACONNAME = "MiniBeacon";
 
-console.log('Argument: ' + process.argv[2]);
 if (process.argv[2] === '-l') {
    var config = require("./secrets/device.json");
    var appClientConfig = JSON.parse(fs.readFileSync('./secrets/device.json', 'utf8'));
 } else {
-   //var config = require("/run/secrets/ibmbeacon");
    var config = JSON.parse(fs.readFileSync('/run/secrets/ibmbeacon', 'utf8'));  
 }
-
-console.log('JSON: ' + JSON.stringify(appClientConfig));
 
 var inRange = [];
 
@@ -25,17 +21,13 @@ var deviceClient = new iotf.IotfDevice(config);
 deviceClient.log.setLevel('debug');
 
 deviceClient.connect();
-
 deviceClient.on('connect', function(){
-    console.log("connected");
 });
 
 deviceClient.on('reconnect', function(){
-    console.log("Reconnected!!!");
 });
 
 deviceClient.on('disconnect', function(){
-    console.log('Disconnected from IoTF');
     process.exit(0);
 });
 
@@ -52,9 +44,6 @@ noble.on('discover', function(peripheral) {
 
     var id = parseInt(peripheral.id, 16);
     var entered = !inRange[id];
-    //inRange.forEach(function (item) {
-    //    console.log("list: " + item);
-    //});
     inRange[id] = {
         peripheral: peripheral
     };
